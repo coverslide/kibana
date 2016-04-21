@@ -16,9 +16,11 @@ import stateMonitorFactory  from 'ui/state_management/state_monitor_factory';
 import uiRoutes from 'ui/routes';
 import uiModules from 'ui/modules';
 import indexTemplate from 'plugins/kibana/dashboard/index.html';
-import { savedDashboardRegister } from 'plugins/kibana/dashboard/services/saved_dashboard_register';
 import { createPanelState } from 'plugins/kibana/dashboard/components/panel/lib/panel_state';
-require('ui/saved_objects/saved_object_registry').register(savedDashboardRegister);
+import savedObjectRegistry from 'ui/saved_objects/saved_object_registry';
+import savedDashboardRegister from 'plugins/kibana/dashboard/services/saved_dashboard_register';
+
+savedObjectRegistry.register(savedDashboardRegister);
 
 const app = uiModules.get('app/dashboard', [
   'elasticsearch',

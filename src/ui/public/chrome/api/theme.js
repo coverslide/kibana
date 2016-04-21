@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-module.exports = function (chrome, internals) {
+export default function (chrome, internals) {
   /**
    * ui/chrome Theme API
    *
@@ -97,4 +97,4 @@ module.exports = function (chrome, internals) {
     return internals.applicationClasses.join(' ');
   };
 
-};
+}

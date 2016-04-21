@@ -5,7 +5,7 @@ import rimraf from 'rimraf';
 const pncp = promisify(ncp);
 const primraf = promisify(rimraf);
 
-export default function (grunt) {
+module.exports = function (grunt) {
   grunt.registerTask('_build:osShellScripts', async function osShellScripts() {
     const done = this.async();
     const source = 'build/kibana/bin';
@@ -21,7 +21,7 @@ export default function (grunt) {
       done(err);
     }
   });
-}
+};
 
 function invokeAllAsync(all, fn) {
   return Promise.all(all.map(fn));

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-module.exports = function (chrome, internals) {
+export default function (chrome, internals) {
 
   /**
    * ui/chrome Template API
@@ -57,4 +57,4 @@ module.exports = function (chrome, internals) {
   };
 
 
-};
+}

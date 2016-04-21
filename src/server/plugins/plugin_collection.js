@@ -19,7 +19,7 @@ function removePluginConfig(pluginCollection, plugin) {
   config.removeSchema(plugin.configPrefix);
 }
 
-module.exports = class Plugins extends Collection {
+export default class Plugins extends Collection {
 
   constructor(kbnServer) {
     super();
@@ -31,8 +31,14 @@ module.exports = class Plugins extends Collection {
     const api = new PluginApi(this.kbnServer, path);
     this[pluginApis].add(api);
 
-    const output = [].concat(require(path)(api) || []);
     const config = this.kbnServer.config;
+    // add compatibility for es6 modules built by babel
+    let defaultExport = require(path);
+    if (defaultExport && defaultExport.__esModule) {
+      defaultExport = defaultExport.default;
+    }
+
+    const output = [].concat(defaultExport(api) || []);
 
     if (!output.length) return;
 
@@ -62,4 +68,4 @@ module.exports = class Plugins extends Collection {
     return this[pluginApis];
   }
 
-};
+}
